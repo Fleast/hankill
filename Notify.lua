@@ -10,6 +10,19 @@ NotificationGui.Name = "NotificationSystem"
 NotificationGui.Parent = PlayerGui
 NotificationGui.ResetOnSpawn = false
 
+-- PLAY SOUND BY HANN.SXHTR
+local SoundService = game:GetService("SoundService")
+local function playSound(soundId)
+    local sound = Instance.new("Sound")
+    sound.SoundId = "rbxassetid://" .. soundId
+    sound.Parent = SoundService
+    sound.Volume = 1.5
+    sound:Play()
+    sound.Ended:Connect(function()
+        sound:Destroy()
+    end)
+end
+
 local activeNotifications = {}
 local notificationCount = 0
 
@@ -34,6 +47,8 @@ local function createNotification(title, content, duration)
     local corner = Instance.new("UICorner")
     corner.CornerRadius = UDim.new(0, 12)
     corner.Parent = notificationFrame
+    
+    playSound("3398620867")
 
     -- Sky Blue Stroke
     local stroke = Instance.new("UIStroke")
